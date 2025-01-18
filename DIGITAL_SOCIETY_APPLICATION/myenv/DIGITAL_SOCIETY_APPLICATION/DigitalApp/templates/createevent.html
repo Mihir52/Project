@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Create a New Event</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="eventname">Event Name</label>
+                <input type="text" class="form-control" id="eventname" name="eventname" required>
+            </div>
+            <div class="form-group col-md-2"> <!-- Decreased width further -->
+                <label for="date">Event Date</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+            </div>
+            <div class="form-group col-md-2"> <!-- Decreased width further -->
+                <label for="time">Event Time</label>
+                <input type="time" class="form-control" id="time" name="time" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="eventdescription">Event Description</label>
+                <textarea class="form-control" id="eventdescription" name="eventdescription" required></textarea>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Create Event</button>
+    </form>
+</div>
+
+{% endblock %}

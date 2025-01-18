@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Update Notice</h2>
+    <a href="{% url 'notice' %}" class="btn btn-secondary mb-3">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="noticename">Notice Name</label>
+                <input type="text" class="form-control" id="noticename" name="noticename" value="{{notice.noticename}}">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="noticedescription">Notice Description</label>
+                <textarea class="form-control" id="noticedescription" name="noticedescription" >{{notice.noticedescription}}</textarea>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Update Notice Details</button>
+    </form>
+</div>
+
+{% endblock %}

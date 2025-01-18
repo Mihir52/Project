@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Update Event</h2>
+    <a href="{% url 'event' %}" class="btn btn-secondary mb-3">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="eventname">Event Name</label>
+                <input type="text" class="form-control" id="eventname" name="eventname" value="{{event.eventname}}">
+            </div>
+            <div class="form-group col-md-2"> <!-- Decreased width further -->
+                <label for="date">Event Date</label>
+                <input type="date" class="form-control" id="date" name="date" value="{{date}}">
+            </div>
+            <div class="form-group col-md-2"> <!-- Decreased width further -->
+                <label for="time">Event Time</label>
+                <input type="time" class="form-control" id="time" name="time" value="{{time}}">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="eventdescription">Event Description</label>
+                <textarea class="form-control" id="eventdescription" name="eventdescription" >{{event.eventdescription}}</textarea>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Update Event Details</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>VERIFY OTP-DIGITAL SOCIETY APPLICATION</title>
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/stylesignup.css' %}">
+	
+</head>
+<body>	
+	<div class="main"> 
+		<div class="signup">
+            {% if msg %}
+            <div class="alert alert-success">
+                {{msg}}
+            </div>
+            {% endif %}
+			<form action = {% url 'verifyotp' %} method = "post">
+				{% csrf_token %}
+                <label> </label>
+				<label for="chk" aria-hidden="true">VERIFY OTP</label>
+				<input type="text" name="otp" placeholder="Enter Your OTP" required="">
+				<button type="submit">SUBMIT OTP</button>
+			</form>
+        </div>
+	</div>
+</body>
+</html>

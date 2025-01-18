@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Society Watchmen</h2>
+    
+    <!-- Table to display members -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="width: 120px;">Profile</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if members %}
+                {% for member in members %}
+                    {% if member.user.usertype == "watchman" %}
+                    <tr>
+                        <td>
+                            <!-- Display profile image (round if available) -->
+                            <img src="{% if member.profile and member.profile.profile %}{{ member.profile.profile.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" 
+                                 alt="{{ member.user.name }}" 
+                                 class="rounded-circle" 
+                                 style="width: 50px; height: 50px; object-fit: cover;">
+                        </td>
+                        <td>{{ member.user.name }}</td>
+                        <td>{{ member.user.email }}</td>
+                        <td>{{ member.profile.mobile }}</td>
+                        <td>{{ member.profile.address }}</td>
+                        {% if user.usertype == "chairman" %}
+                        <td style="width: 175px;">
+                            <!-- Update button -->
+                            <a href="{% url 'updatemember' pk=member.user.pk %}" class="btn btn-warning" >Update</a>
+                            <!-- Delete button -->
+                            <a href="{% url 'deletemember' pk=member.user.pk %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">No members found.</td>
+                </tr>
+            {% endif %}
+        </tbody>        
+    </table>
+</div>
+{% endblock %}

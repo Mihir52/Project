@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="container">
+    <h2>Notices</h2>
+    <div class="notice-list" >
+        {% for notice in notices %}
+        <div class="notice" style="margin-bottom: 20px;">
+            <h4>{{ notice.noticename }}</h4>
+            <p>{{ notice.noticedescription }}</p>
+            <p><strong>Date:</strong> {{ notice.createnoticetime }}</p>
+            
+            {% if user.usertype == "chairman" %}
+            <!-- Update button, linking to the update event page -->
+            <a href="{% url 'updatenotice' pk=notice.pk %}" class="btn btn-warning">Update</a>
+
+            <!-- Delete button, linking to the delete event confirmation page -->
+            <a href="{% url 'deletenotice' pk=notice.pk %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Notice?');">Delete</a>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p>No Notice available</p>
+        {% endfor %}
+    </div>
+    {% if user.usertype == "chairman" %}
+    <a href="{% url 'createnotice' %}" class="btn btn-success">Create Notice</a>
+    {% endif %}
+</div>
+
+{% endblock %}
